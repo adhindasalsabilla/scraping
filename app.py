@@ -5,17 +5,17 @@ import pandas as pd
 # Baca data dari file PDF
 data = pd.read_csv('imdb_primary_uas.csv')
 
-# Filter 10 film teratas berdasarkan rating IMDb
-top_10 = data.sort_values(by='Rating', ascending=False).head(10)
+# Filter 5 film teratas dengan durasi terlama
+top_5 = data.sort_values(by='Durasi(Menit)', ascending=False).head(5)
 
 # Buat grafik bar
 fig, ax = plt.subplots(figsize=(10, 6))
-ax.bar(top_10['Name'], top_10['Rating'])
+ax.bar(top_5['Name'], top_5['Durasi(Menit)'])
 ax.set_xlabel('Nama Film')
-ax.set_ylabel('Rating IMDb')
-ax.set_title('10 Film Teratas Berdasarkan Rating di IMDB')
+ax.set_ylabel('Durasi (Menit)')
+ax.set_title('5 Film Teratas dengan Durasi Terlama')
 plt.show()
 
 # Tampilkan grafik menggunakan Streamlit
-st.title('10 Film Teratas Berdasarkan Rating IMDB')
+st.title('5 Film Teratas dengan Durasi Terlama')
 st.pyplot(fig)
