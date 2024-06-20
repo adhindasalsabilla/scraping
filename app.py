@@ -1,18 +1,9 @@
-import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
+import pandas as pd
 
-# Nama file CSV
-fn1 = 'imdb_primary_uas.csv'
-
-# Menampilkan judul di halaman web
-st.title("Scraping IMDB")
-
-# Membaca file CSV ke dalam DataFrame dengan encoding 'latin1'
-df1 = pd.read_csv(fn1, encoding='latin1')
-
-# Menampilkan DataFrame sebagai tabel
-st.dataframe(df1)
+# Baca data dari file PDF
+data = pd.read_csv('imdb_primary_uas.csv')
 
 # Filter 5 film teratas dengan durasi terlama
 top_5 = data.sort_values(by='Durasi(Menit)', ascending=False).head(5)
@@ -28,6 +19,3 @@ plt.show()
 # Tampilkan grafik menggunakan Streamlit
 st.title('5 Film Teratas dengan Durasi Terlama')
 st.pyplot(fig)
-
-# Menampilkan visualisasi
-visualize_top_5(df1)
