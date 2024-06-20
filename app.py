@@ -19,3 +19,4 @@ plt.show()
 # Tampilkan grafik menggunakan Streamlit
 st.title('5 Film Teratas dengan Durasi Terlama')
 st.pyplot(fig)
+st.write("Grafik ini menjelaskan tentang Top 5 Judul Film dengan Durasi Terlama berdasarkan IMDB. Gang of Wayseppur menjadi film dengan durasi terlama (melampaui 300 menit) diikuti Ben-Hur dengan durasi sekitar 225 menit."")
