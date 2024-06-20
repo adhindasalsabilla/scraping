@@ -1,9 +1,9 @@
+import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
-import pandas as pd
 
-# Baca data dari file CSV
-data = pd.read_csv('imdb_primary_uas.csv')
+# Nama file CSV
+fn1 = 'imdb_primary_uas.csv'
 
 # Menampilkan judul di halaman web
 st.title("Scraping IMDB")
@@ -14,17 +14,22 @@ df1 = pd.read_csv(fn1, encoding='latin1')
 # Menampilkan DataFrame sebagai tabel
 st.dataframe(df1)
 
-# Filter 5 film teratas dengan durasi terlama
-top_5 = data.sort_values(by='Durasi(Menit)', ascending=False).head(5)
+# Fungsi untuk membuat visualisasi
+def visualize_top_5(df):
+    # Ambil 5 baris pertama
+    top_5 = df.head(5)
 
-# Buat grafik bar
-fig, ax = plt.subplots(figsize=(10, 6))
-ax.bar(top_5['Name'], top_5['Durasi(Menit)'])
-ax.set_xlabel('Nama Film')
-ax.set_ylabel('Durasi (Menit)')
-ax.set_title('5 Film Teratas dengan Durasi Terlama')
-plt.show()
+    # Ambil kolom yang relevan
+    name = top_5['name']
+    rating = top_5['rating']
 
-# Tampilkan grafik menggunakan Streamlit
-st.title('5 Film Teratas dengan Durasi Terlama')
-st.pyplot(fig)
+    # Buat visualisasi
+    plt.figure(figsize=(10, 8))
+    plt.barh(name, rating, color='skyblue')
+    plt.title('Top 5 Rating Film di IMDB')
+    plt.xlabel('Rating')
+    plt.ylabel('Name')
+    st.pyplot(plt)
+
+# Menampilkan visualisasi
+visualize_top_5(df1)
