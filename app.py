@@ -1,25 +1,21 @@
-import pandas as pd
 import streamlit as st
+import matplotlib.pyplot as plt
+import pandas as pd
 
-# Fungsi untuk membaca data IMDB
-def load_imdb_data():
-    fn1 = 'imdb_primary_uas.csv'
-    df1 = pd.read_csv(fn1, encoding='latin1')
-    return df1
+# Baca data dari file PDF
+data = pd.read_csv('imdb_primary_uas.csv')
 
-# Fungsi untuk membuat visualisasi
-def visualize_top_5(df):
-    # Ambil 5 baris pertama
-    top_5 = df.head(5)
+# Filter 10 film teratas berdasarkan rating IMDb
+top_10 = data.sort_values(by='Rating', ascending=False).head(10)
 
-    # Ambil kolom yang relevan
-    name = top_5['name']
-    rating = top_5['rating']
+# Buat grafik bar
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.bar(top_10['Name'], top_10['Rating'])
+ax.set_xlabel('Nama Film')
+ax.set_ylabel('Rating IMDb')
+ax.set_title('10 Film Teratas Berdasarkan Rating di IMDB')
+plt.show()
 
-    # Buat visualisasi
-    plt.figure(figsize=(10, 8))
-    plt.barh(name, rating, color='skyblue')
-    plt.title('Top 5 Rating Film di IMDB')
-    plt.xlabel('Rating')
-    plt.ylabel('Name')
-    st.pyplot(plt)
+# Tampilkan grafik menggunakan Streamlit
+st.title('10 Film Teratas Berdasarkan Rating IMDB')
+st.pyplot(fig)
